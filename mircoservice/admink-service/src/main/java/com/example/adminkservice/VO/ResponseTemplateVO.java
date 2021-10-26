@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ResponseTemplateVO {
     private Admin admin;
-    private SalesProducts salesProducts;
+    private SalesProduct salesProduct;
 }

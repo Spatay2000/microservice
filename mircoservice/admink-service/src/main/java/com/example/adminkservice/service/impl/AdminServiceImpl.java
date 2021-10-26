@@ -1,7 +1,7 @@
 package com.example.adminkservice.service.impl;
 
 import com.example.adminkservice.VO.ResponseTemplateVO;
-import com.example.adminkservice.VO.SalesProducts;
+import com.example.adminkservice.VO.SalesProduct;
 import com.example.adminkservice.entity.Admin;
 import com.example.adminkservice.repo.AdminRepo;
 import com.example.adminkservice.service.AdminService;
@@ -21,8 +21,8 @@ public class AdminServiceImpl implements AdminService, UserDetailsService {
     private RestTemplate restTemplate;
 
 
-    public SalesProducts getSalesProductsById(int SalesProductsId){
-        return restTemplate.getForObject("http://sales-products-service/sales"+ SalesProductsId, SalesProducts.class);
+    public SalesProduct getSalesProductsById(int SalesProductsId){
+        return restTemplate.getForObject("http://sales-products-service/sales"+ SalesProductsId, SalesProduct.class);
     }
 
     @Autowired
@@ -77,9 +77,9 @@ public class AdminServiceImpl implements AdminService, UserDetailsService {
         ResponseTemplateVO vo = new ResponseTemplateVO();
         Admin admin = AdminRepo.getById(adminId);
 
-        SalesProducts salesProducts = restTemplate.getForObject("http://localhost:9091/sales/all/1" , SalesProducts.class);
+        SalesProduct salesProduct = restTemplate.getForObject("http://localhost:9091/sales/all/1" , SalesProduct.class);
 
-        vo.setSalesProducts(salesProducts);
+        vo.setSalesProduct(salesProduct);
         vo.setAdmin(admin);
         return vo;
     }

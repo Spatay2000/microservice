@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class SalesProducts {
+public class SalesProduct {
     private int id;
     private String SalesProduct;
     private double value;
