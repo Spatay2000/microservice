@@ -5,6 +5,8 @@ import com.example.adminkservice.VO.SalesProduct;
 import com.example.adminkservice.entity.Admin;
 import com.example.adminkservice.repo.AdminRepo;
 import com.example.adminkservice.service.AdminService;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -21,18 +23,25 @@ public class AdminServiceImpl implements AdminService, UserDetailsService {
     private RestTemplate restTemplate;
 
 
-    public SalesProduct getSalesProductsById(int SalesProductsId){
-        return restTemplate.getForObject("http://sales-products-service/sales"+ SalesProductsId, SalesProduct.class);
-    }
+//    public SalesProduct getSalesProductsById(int salesProductsId){
+//        return restTemplate.getForObject("http://sales-products-service/sales"+ salesProductsId, SalesProduct.class);
+//    }
+
 
     @Autowired
     private AdminRepo AdminRepo;
 
 
     @Override
+    @HystrixCommand(
+            fallbackMethod = "getByIdFallback"
+    )
     public Admin getById(int id) {
 
         return AdminRepo.getById(id);
+    }
+    public Admin getByIdFallback(int id) {
+        return AdminRepo.getById(0);
     }
 
     @Override
@@ -71,14 +80,29 @@ public class AdminServiceImpl implements AdminService, UserDetailsService {
         }
         return user;
     }
+    @HystrixCommand(fallbackMethod = "getSalesProductsFallback",
+            threadPoolKey = "getSalesProducts",
+            threadPoolProperties = {
+                    @HystrixProperty(name="coreSize", value="100"),
+                    @HystrixProperty(name="maxQueueSize", value="50"),
+            })
     @Override
     public ResponseTemplateVO getSalesProducts(int adminId) {
 
         ResponseTemplateVO vo = new ResponseTemplateVO();
         Admin admin = AdminRepo.getById(adminId);
 
-        SalesProduct salesProduct = restTemplate.getForObject("http://localhost:9091/sales/all/1" , SalesProduct.class);
+        SalesProduct salesProduct = restTemplate.getForObject("http://sales-products-service/sales/all/1" , SalesProduct.class);
 
+        vo.setSalesProduct(salesProduct);
+        vo.setAdmin(admin);
+        return vo;
+    }
+    public ResponseTemplateVO getSalesProductsFallback(int adminId){
+
+        ResponseTemplateVO vo = new ResponseTemplateVO();
+        Admin admin = AdminRepo.getById(adminId);
+        SalesProduct salesProduct = new SalesProduct(0,"Error",0.0);
         vo.setSalesProduct(salesProduct);
         vo.setAdmin(admin);
         return vo;

@@ -12,4 +12,6 @@ public interface AdminService {
     void delete(int id);
     Admin findByEmail(String email);
     ResponseTemplateVO getSalesProducts(int adminId);
+
+
 }

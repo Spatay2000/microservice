@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/admink-service/admink-service.iml" filepath="$PROJECT_DIR$/admink-service/admink-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/discovery-service/discovery-service.iml" filepath="$PROJECT_DIR$/discovery-service/discovery-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/mircoservice.iml" filepath="$PROJECT_DIR$/.idea/mircoservice.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sales-products/sales-products.iml" filepath="$PROJECT_DIR$/sales-products/sales-products.iml" />
+    </modules>
+  </component>
+</project>

@@ -1,6 +1,7 @@
 package com.example.salesproducts.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,6 +12,7 @@ import javax.persistence.*;
 @Table(name = "sales")
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class SalesProduct {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
