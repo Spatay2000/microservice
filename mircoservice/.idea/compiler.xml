@@ -7,22 +7,28 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="zuul-server" />
         <module name="sales-products" />
+        <module name="auth-service" />
         <module name="admink-service" />
         <module name="discovery-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="admink-service" target="11" />
+      <module name="auth-service" target="11" />
       <module name="discovery-service" target="11" />
       <module name="sales-products" target="11" />
+      <module name="zuul-server" target="11" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="admink-service" options="-parameters" />
+      <module name="auth-service" options="-parameters" />
       <module name="discovery-service" options="-parameters" />
       <module name="sales-products" options="-parameters" />
+      <module name="zuul-server" options="-parameters" />
     </option>
   </component>
 </project>

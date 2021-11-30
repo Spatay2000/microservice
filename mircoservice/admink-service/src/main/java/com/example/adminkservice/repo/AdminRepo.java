@@ -9,7 +9,7 @@ import java.util.List;
 
 @Repository
 public interface AdminRepo extends JpaRepository<Admin,Integer> {
-    Admin getById(int id);
+    Admin getById(Integer id);
     List<Admin> findAll();
     Admin findByEmail(String email);
 

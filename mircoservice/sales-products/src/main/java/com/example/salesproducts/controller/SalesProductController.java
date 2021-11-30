@@ -25,7 +25,7 @@ public class SalesProductController {
         return salesProductService.uptade(salesProduct);
     }
 
-    @PostMapping("/all")
+    @GetMapping("/all")
     public List<SalesProduct> findAll(){
         return salesProductService.findAll();
     }

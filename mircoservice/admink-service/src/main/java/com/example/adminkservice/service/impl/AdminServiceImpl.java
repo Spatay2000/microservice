@@ -23,9 +23,9 @@ public class AdminServiceImpl implements AdminService, UserDetailsService {
     private RestTemplate restTemplate;
 
 
-//    public SalesProduct getSalesProductsById(int salesProductsId){
-//        return restTemplate.getForObject("http://sales-products-service/sales"+ salesProductsId, SalesProduct.class);
-//    }
+    public SalesProduct getSalesProductsById(int salesProductsId){
+        return restTemplate.getForObject("http://sales-products-service/sales"+ salesProductsId, SalesProduct.class);
+    }
 
 
     @Autowired
@@ -33,10 +33,10 @@ public class AdminServiceImpl implements AdminService, UserDetailsService {
 
 
     @Override
-    @HystrixCommand(
-            fallbackMethod = "getByIdFallback"
-    )
-    public Admin getById(int id) {
+//    @HystrixCommand(
+//            fallbackMethod = "getByIdFallback"
+//    )
+    public Admin getById(Integer id) {
 
         return AdminRepo.getById(id);
     }
@@ -87,10 +87,10 @@ public class AdminServiceImpl implements AdminService, UserDetailsService {
                     @HystrixProperty(name="maxQueueSize", value="50"),
             })
     @Override
-    public ResponseTemplateVO getSalesProducts(int adminId) {
+    public ResponseTemplateVO getSalesProducts(Integer adminId) {
 
         ResponseTemplateVO vo = new ResponseTemplateVO();
-        Admin admin = AdminRepo.getById(adminId);
+        Admin admin = AdminRepo.findById(adminId).get();
 
         SalesProduct salesProduct = restTemplate.getForObject("http://sales-products-service/sales/all/1" , SalesProduct.class);
 
@@ -98,10 +98,11 @@ public class AdminServiceImpl implements AdminService, UserDetailsService {
         vo.setAdmin(admin);
         return vo;
     }
-    public ResponseTemplateVO getSalesProductsFallback(int adminId){
-
+    public ResponseTemplateVO getSalesProductsFallback(Integer adminId){
+        System.out.println("here");
         ResponseTemplateVO vo = new ResponseTemplateVO();
-        Admin admin = AdminRepo.getById(adminId);
+        Admin admin = AdminRepo.findById(adminId).get();
+        Admin a = new Admin(0, " ", " ", " ", " ");
         SalesProduct salesProduct = new SalesProduct(0,"Error",0.0);
         vo.setSalesProduct(salesProduct);
         vo.setAdmin(admin);

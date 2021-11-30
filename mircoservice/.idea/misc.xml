@@ -6,6 +6,8 @@
         <option value="$PROJECT_DIR$/admink-service/pom.xml" />
         <option value="$PROJECT_DIR$/discovery-service/pom.xml" />
         <option value="$PROJECT_DIR$/sales-products/pom.xml" />
+        <option value="$PROJECT_DIR$/auth-service/pom.xml" />
+        <option value="$PROJECT_DIR$/zuul-server/pom.xml" />
       </list>
     </option>
   </component>

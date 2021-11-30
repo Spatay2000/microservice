@@ -5,23 +5,40 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
-@Data
-@NoArgsConstructor
-public class Role implements GrantedAuthority {
+@Table(name = "roles")
+public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
 
-    @Override
-    public String getAuthority() {
-        return this.name;
+    @Enumerated(EnumType.STRING)
+    @Column(length = 20)
+    private ERole name;
+
+    public Role() {}
+
+    public Role(ERole name) {
+        this.name = name;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public ERole getName() {
+        return name;
+    }
+
+    public void setName(ERole name) {
+        this.name = name;
+    }
+
 }

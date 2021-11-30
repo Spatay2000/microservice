@@ -1,6 +1,7 @@
 package com.example.adminkservice.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -14,10 +15,11 @@ import java.util.Collection;
 @Table(name = "admin")
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class Admin implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     private String firstName;
     private String lastName;
     @Column(unique = true)
