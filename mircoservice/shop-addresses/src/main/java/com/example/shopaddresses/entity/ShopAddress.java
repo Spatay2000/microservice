@@ -1,4 +1,4 @@
-package com.example.salesproducts.entity;
+package com.example.shopaddresses.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
@@ -9,16 +9,16 @@ import javax.persistence.*;
 
 @JsonIgnoreProperties({"hibernateLazyInitializer"})
 @Entity
-@Table(name = "sales")
+@Table(name = "shop_address")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class SalesProduct {
+public class ShopAddress {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
         private int id;
         private String SalesProduct;
-        private double value;
-        private byte[] image;
+
+
 
 }

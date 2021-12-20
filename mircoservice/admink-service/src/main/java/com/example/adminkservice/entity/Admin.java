@@ -20,7 +20,7 @@ public class Admin implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String firstName;
+    private String username;
     private String lastName;
     @Column(unique = true)
     private String email;
